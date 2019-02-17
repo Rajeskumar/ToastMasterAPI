@@ -1,20 +1,11 @@
 package com.lexus.toastmasterapi.dao
 
-import com.lexus.toastmasterapi.domain.Member
+import com.lexus.toastmasterapi.domain.TS_Member
+import org.springframework.data.annotation.Id
+import org.springframework.data.cassandra.repository.CassandraRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-class MemberDAO {
+interface MemberDAO extends CassandraRepository<TS_Member, Id>{
 
-    List<Member> getMembers(){
-        List<Member> result = new ArrayList<Member>()
-
-        Member mb1 = new Member("1", "Rajeshkumar")
-        Member mb2 = new Member("2", "Praveenkumar")
-
-        result.add(mb1)
-        result.add(mb2)
-
-        return result
-    }
 }

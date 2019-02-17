@@ -1,6 +1,6 @@
 package com.lexus.toastmasterapi.controller
 
-import com.lexus.toastmasterapi.domain.Member
+import com.lexus.toastmasterapi.domain.TS_Member
 import com.lexus.toastmasterapi.service.MemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -16,12 +16,12 @@ class APIController {
 
     @RequestMapping(value = "/welcome")
     String welcome(){
-        return "Welcome to ToastMaster API Applications"
+        return "Welcome to ToastMaster API Application"
     }
 
     @GetMapping(value = "/getMembers")
     @ResponseBody
-    Member getAllMember(){
-        return new Member('1','Rajeshkumar')
+    List<TS_Member> getAllMember(){
+        return memberService.getMembers();
     }
 }
