@@ -1,37 +1,27 @@
 package com.lexus.toastmasterapi.dao
 
-import com.datastax.driver.core.Cluster
-import com.datastax.driver.core.ConsistencyLevel
-import com.datastax.driver.core.QueryOptions
-import com.datastax.driver.core.Session
-import com.datastax.driver.core.SocketOptions
-import com.datastax.driver.core.policies.ConstantReconnectionPolicy
-import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy
-import com.datastax.driver.core.policies.DefaultRetryPolicy
-import com.datastax.driver.core.policies.LoggingRetryPolicy
-import com.datastax.driver.core.policies.TokenAwarePolicy
+import com.lexus.toastmasterapi.domain.TS_Member
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import spock.lang.Specification
 
+@RunWith(SpringRunner)
+@SpringBootTest
+class MemberDAOTest extends  Specification{
 
-class MemberDAOTest {
+    @Autowired
+    MemberDAO memberDAO
 
-    static void main(String[] args){
-        println("Welcome to test")
+    @Test
+    void testGetMembers(){
 
-        int port = 9042
+        List<TS_Member> allMembers = memberDAO.findAll()
 
+        Assert.assertEquals(3, allMembers.size())
 
-        Cluster cluster = Cluster.builder()
-                .addContactPoint('localhost')
-                .withPort(port).withoutMetrics()
-                .build()
-
-        Session session = cluster.connect('toastmaster')
-
-        println('Connected')
     }
 }
