@@ -7,13 +7,18 @@ import org.springframework.data.cassandra.core.mapping.Table
 
 @ToString(includeNames = true, includeFields = true)
 @Table
-class TS_Member {
+class TM_Member {
 
-    TS_Member(int id, String name, String email, long mobile) {
+    TM_Member(){
+
+    }
+
+    TM_Member(int id, String name, String email, long mobile, String shortName) {
         this.id = id
         this.name = name
         this.email = email
         this.mobile = mobile
+        this.shortName = shortName
     }
 
     @PrimaryKey
@@ -27,6 +32,9 @@ class TS_Member {
 
     @Column
     long mobile
+
+    @Column
+    String shortName
 
     String getEmail() {
         return email
@@ -58,5 +66,13 @@ class TS_Member {
 
     void setName(String name) {
         this.name = name
+    }
+
+    String getShortName() {
+        return shortName
+    }
+
+    void setShortName(String shortName) {
+        this.shortName = shortName
     }
 }

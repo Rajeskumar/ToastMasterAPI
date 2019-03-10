@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="false" />
+        <param name="maxFileSize" value="10KB" />
+        <param name="maxBackupIndex" value="5" />
+        <!-- For Tomcat -->
+        <param name="file" value="${CATALINA_HOME}/logs/toastMasterApp.log" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </layout>
+    </Appenders>
+
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="file" />
+    </root>
+</Configuration>
+
