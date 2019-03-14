@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
+import java.nio.file.Path
+
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "false")
 @RestController
+@RequestMapping("/toastMaster")
 class APIController {
 
     @Autowired
@@ -49,11 +52,26 @@ class APIController {
         return eventService.getEvents()
     }
 
-    @PostMapping(value = "/updateEvent")
-    ResponseEntity updateToastmasterEvent(String eventData){
+    @PostMapping(value = "/createEvent")
+    ResponseEntity createToastmasterEvent(String eventData){
 
-        eventService.createEvents(eventData)
+        boolean isSuccess = eventService.createEvents(eventData)
 
-        return new ResponseEntity<String>("New Event Created", HttpStatus.CREATED)
+        if(isSuccess)
+            return new ResponseEntity<String>("New Event Created", HttpStatus.CREATED)
+        else
+            return new ResponseEntity<String>("Event Couldn't be created", HttpStatus.EXPECTATION_FAILED)
+    }
+
+    @GetMapping(value = "/getEventByNo/{eventNo}")
+    @ResponseBody
+    TM_Events getEventbyEventNo(@PathVariable("eventNo") int eventNo){
+        return eventService.getEventbyEventNo(eventNo)
+    }
+
+    @GetMapping(value = "/getEventByDate/{eventDate}")
+    @ResponseBody
+    TM_Events getEventbyEventDate(@PathVariable("eventDate") String eventDate){
+        return eventService.getEventbyEventDate(eventDate)
     }
 }
