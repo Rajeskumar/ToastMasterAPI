@@ -1,7 +1,6 @@
 package com.lexus.toastmasterapi.domain
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.lexus.toastmasterapi.dao.EventPrimaryKey
+
 import groovy.transform.ToString
 import org.springframework.data.cassandra.core.mapping.Column
 import org.springframework.data.cassandra.core.mapping.PrimaryKey

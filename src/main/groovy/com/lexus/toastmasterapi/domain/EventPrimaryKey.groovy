@@ -1,4 +1,4 @@
-package com.lexus.toastmasterapi.dao
+package com.lexus.toastmasterapi.domain
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
@@ -17,8 +17,8 @@ class EventPrimaryKey implements Serializable {
     @JsonDeserialize(using = DateJsonDeserializer)
     private Date eventDate
 
-    @PrimaryKeyColumn(name = "eventno", ordinal = 0, ordering = Ordering.ASCENDING)
-    private int eventNo
+    @PrimaryKeyColumn(name = "eventId", ordinal = 0, ordering = Ordering.ASCENDING)
+    private int eventId
 
     Date getEventDate() {
         return eventDate
@@ -28,11 +28,11 @@ class EventPrimaryKey implements Serializable {
         this.eventDate = eventDate
     }
 
-    int getEventNo() {
-        return eventNo
+    int getEventId() {
+        return eventId
     }
 
-    void setEventNo(int eventNo) {
-        this.eventNo = eventNo
+    void setEventId(int eventId) {
+        this.eventId = eventId
     }
 }

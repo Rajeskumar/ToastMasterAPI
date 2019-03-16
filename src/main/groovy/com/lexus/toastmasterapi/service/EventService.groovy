@@ -46,9 +46,9 @@ class EventService {
         eventDAO.save(updatedEvent)? true : false
     }
 
-    TM_Events getEventbyEventNo(int eventNo){
+    TM_Events getEventbyEventId(int eventId){
 
-        eventDAO.findByKeyEventNo(eventNo)
+        eventDAO.findByKeyEventId(eventId)
 
     }
 

@@ -1,7 +1,6 @@
 package com.lexus.toastmasterapi.service
 
 import com.lexus.toastmasterapi.common.DateJsonSerializer
-import com.lexus.toastmasterapi.dao.EventDAO
 import com.lexus.toastmasterapi.domain.TM_Events
 import org.junit.Assert
 import org.junit.Test
@@ -19,15 +18,12 @@ class EventServiceTest {
     @Autowired
     EventService eventService
 
-    @Autowired
-    EventDAO eventDAO
-
     @Test
     void createEventTest() {
         String newEventJson = "{\n" +
                 "   \"key\": {\n" +
                 "      \"eventDate\": \"2019-03-12\",\n" +
-                "      \"eventNo\": 1\n" +
+                "      \"eventId\": 1\n" +
                 "   },\n" +
                 "   \"word_of_day\": \"Impeccable\",\n" +
                 "   \"theme_of_day\": \"Fun\",\n" +
@@ -58,13 +54,13 @@ class EventServiceTest {
 
 
     @Test
-    void getEventbyEventNoTest(){
-        int eventNo = 1;
+    void getEventbyeventIdTest(){
+        int eventId = 1;
 
-        TM_Events event = eventService.getEventbyEventNo(eventNo)
+        TM_Events event = eventService.getEventbyEventId(eventId)
 
         Assert.assertNotNull(event)
-        Assert.assertEquals(1, event.key.eventNo)
+        Assert.assertEquals(1, event.key.eventId)
     }
 
     @Test
@@ -73,7 +69,7 @@ class EventServiceTest {
         String updateEventJson = "{\n" +
                 "   \"key\": {\n" +
                 "      \"eventDate\": \"2019-03-12\",\n" +
-                "      \"eventNo\": 1\n" +
+                "      \"eventId\": 1\n" +
                 "   },\n" +
                 "   \"word_of_day\": \"Bizzare\",\n" +
                 "   \"theme_of_day\": \"Fun\",\n" +
