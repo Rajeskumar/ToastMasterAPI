@@ -56,4 +56,25 @@ class EvaluationServiceTest extends Specification {
         'Query Report for event 1' | 1
         'Query Report for event 2' | 2
     }
+
+    def "Verify the evaluation report insert to backend"() {
+
+        String evaluationJson = "{\n" +
+                "  \"key\": {\n" +
+                "    \"memberName\": \"Rajesh\",\n" +
+                "    \"eventId\": 1\n" +
+                "  },\n" +
+                "  \"evaluatorName\": \"Bharani\",\n" +
+                "  \"count\": \"0\",\n" +
+                "  \"report\": \"Give Pause between sentence. Speak Slowly and Clearly. Pronounce words clearly.\",\n" +
+                "  \"evaluatorRole\": \"Toastmaster\",\n" +
+                "  \"memberRole\": \"Topic Speaker\"\n" +
+                "}"
+
+        when:
+        boolean isSuccess = evaluationService.insertEvaluationReport(evaluationJson)
+
+        then:
+        isSuccess
+    }
 }

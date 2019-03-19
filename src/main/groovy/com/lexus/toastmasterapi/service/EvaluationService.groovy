@@ -1,5 +1,6 @@
 package com.lexus.toastmasterapi.service
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.lexus.toastmasterapi.dao.EvaluationDAO
 import com.lexus.toastmasterapi.domain.TM_Evaluation
 import groovy.util.logging.Slf4j
@@ -13,6 +14,9 @@ class EvaluationService {
     @Autowired
     EvaluationDAO evaluationDAO
 
+    @Autowired
+    ObjectMapper mapper
+
     List<TM_Evaluation> getAllEvaluationReport(){
         return evaluationDAO.findAll()
     }
@@ -25,4 +29,18 @@ class EvaluationService {
         return evaluationDAO.findByKeyEventId(eventId)
     }
 
+    boolean insertEvaluationReport (String jsonMessage){
+
+        TM_Evaluation evaluationData = mapper.readValue(jsonMessage, TM_Evaluation.class)
+
+        evaluationData.key.id = UUID.randomUUID()
+
+        TM_Evaluation insertedReport = evaluationDAO.insert(evaluationData)
+
+        if(insertedReport){
+            return true
+        }else{
+            return false
+        }
+    }
 }

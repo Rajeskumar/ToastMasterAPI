@@ -3,10 +3,16 @@ package com.lexus.toastmasterapi.controller
 import com.lexus.toastmasterapi.service.EvaluationService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiResponse
+import io.swagger.annotations.ApiResponses
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
@@ -47,5 +53,34 @@ class EvaluationController {
             notes = """enter a member name to search for evaluation report for his/her event. ex: Rajesh|Praveen""")
     public getEvaluationReportByMemberName(@PathVariable("memberName") String memberName ){
         return evaluationService.getEvaluationReportByName(memberName)
+    }
+
+    @ApiResponses(value = [
+            @ApiResponse(code = 200, message = 'OK'),
+            @ApiResponse(code = 400, message = 'Bad request'),
+            @ApiResponse(code = 500, message = 'Internal Server Error')])
+    @ApiOperation(value = "Add Evaluation Report into the application",
+            notes = """
+            {
+               "key": {
+                  "memberName": "Rajesh|Praveen|Kalai|Parvathi|Jagan|Bharani",
+                  "eventId": 1
+               },
+               "evaluatorName": "Rajesh|Praveen|Kalai|Parvathi|Jagan|Bharani",
+               "count": "1|2|... | 0",
+               "report": " Detailed Report",
+               "evaluatorRole": "Toastmaster|AhCounter|Timer|Grammarian|Evaluator|..",
+               "memberRole": "Toastmaster|AhCounter|Timer|Grammarian|Evaluator|.."
+            }""")
+    @PostMapping(value = "/insertEvaluationReport")
+    @ResponseBody
+    ResponseEntity insertEvaluationReport(@RequestBody String evaluationRequest){
+
+        boolean isSuccess = evaluationService.insertEvaluationReport(evaluationRequest)
+
+        if(isSuccess)
+            return new ResponseEntity<String>("New Event Created", HttpStatus.CREATED)
+        else
+            return new ResponseEntity<String>("Event Couldn't be created", HttpStatus.EXPECTATION_FAILED)
     }
 }

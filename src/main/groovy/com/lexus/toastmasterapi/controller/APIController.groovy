@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
@@ -86,7 +87,7 @@ class APIController {
             {
                "key": {
                   "eventDate": "2019-03-12",
-                  "eventNo": 1
+                  "eventId": 1
                },
                "word_of_day": "Impeccable",
                "theme_of_day": "Fun",
@@ -103,9 +104,9 @@ class APIController {
             }""")
     @PostMapping(value = "/createEvent")
     @ResponseBody
-    ResponseEntity createToastmasterEvent(@ApiParam(name = "createToastmasterEvent", value = "Create Toastmaster Event", required = true) String eventData){
+    ResponseEntity createToastmasterEvent(@RequestBody String eventRequest){
 
-        boolean isSuccess = eventService.createEvents(eventData)
+        boolean isSuccess = eventService.createEvents(eventRequest)
 
         if(isSuccess)
             return new ResponseEntity<String>("New Event Created", HttpStatus.CREATED)
