@@ -1,21 +1,15 @@
 package com.lexus.toastmasterapi.config
 
 import com.datastax.driver.core.Cluster
-import com.datastax.driver.core.ConsistencyLevel
-import com.datastax.driver.core.QueryOptions
 import com.datastax.driver.core.Session
-import com.datastax.driver.core.SocketOptions
-import com.datastax.driver.core.policies.ConstantReconnectionPolicy
-import com.datastax.driver.core.policies.DCAwareRoundRobinPolicy
-import com.datastax.driver.core.policies.DefaultRetryPolicy
-import com.datastax.driver.core.policies.LoggingRetryPolicy
-import com.datastax.driver.core.policies.TokenAwarePolicy
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories
 
 @Configuration
-class CassandraConfig {
+@EnableCassandraRepositories
+class CassandraConfig{
 
     @Value('${cassandra.keyspace}')
     String keyspace

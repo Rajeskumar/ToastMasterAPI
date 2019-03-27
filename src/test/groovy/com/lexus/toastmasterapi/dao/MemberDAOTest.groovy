@@ -1,6 +1,7 @@
 package com.lexus.toastmasterapi.dao
 
-import com.lexus.toastmasterapi.domain.TS_Member
+import com.lexus.toastmasterapi.domain.TM_Member
+import groovy.util.logging.Slf4j
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,7 +12,7 @@ import spock.lang.Specification
 
 @RunWith(SpringRunner)
 @SpringBootTest
-class MemberDAOTest extends  Specification{
+class MemberDAOTest {
 
     @Autowired
     MemberDAO memberDAO
@@ -19,7 +20,7 @@ class MemberDAOTest extends  Specification{
     @Test
     void testGetMembers(){
 
-        List<TS_Member> allMembers = memberDAO.findAll()
+        List<TM_Member> allMembers = memberDAO.findAll()
 
         Assert.assertEquals(3, allMembers.size())
 
