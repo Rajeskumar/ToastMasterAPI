@@ -14,7 +14,7 @@ class DateJsonSerializer extends JsonSerializer<Date> {
 
     @Override
     void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-        date ? jsonGenerator.writeString(getDateTimeToGMTAsString(date)) : jsonGenerator.writeNull()
+        date ? jsonGenerator.writeString(getDateToGMTAsString(date)) : jsonGenerator.writeNull()
     }
 
     static String getDateTimeToGMTAsString(Date date) {

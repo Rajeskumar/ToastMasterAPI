@@ -58,4 +58,12 @@ class EventService {
         eventDAO.findByKeyEventDate(date)
 
     }
+
+    TM_Events deleteEvent(String eventData){
+
+        TM_Events toDelete = mapper.readValue(eventData, TM_Events.class)
+
+        eventDAO.delete(toDelete)
+
+    }
 }

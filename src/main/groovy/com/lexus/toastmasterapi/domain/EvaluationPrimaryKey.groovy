@@ -22,6 +22,9 @@ class EvaluationPrimaryKey implements Serializable {
     @Column
     private String memberName
 
+    @Column
+    private String evaluatorRole
+
     int getEventId() {
         return eventId
     }
@@ -44,5 +47,13 @@ class EvaluationPrimaryKey implements Serializable {
 
     void setMemberName(String memberName) {
         this.memberName = memberName
+    }
+
+    String getEvaluatorRole() {
+        return evaluatorRole
+    }
+
+    void setEvaluatorRole(String evaluatorRole) {
+        this.evaluatorRole = evaluatorRole
     }
 }

@@ -83,4 +83,41 @@ class EvaluationController {
         else
             return new ResponseEntity<String>("Event Couldn't be created", HttpStatus.EXPECTATION_FAILED)
     }
+
+    @ApiResponses(value = [
+            @ApiResponse(code = 200, message = 'OK'),
+            @ApiResponse(code = 400, message = 'Bad request'),
+            @ApiResponse(code = 500, message = 'Internal Server Error')])
+    @ApiOperation(value = "Update Evaluation Report into the application",
+            notes = """
+            {
+               "key": {
+                  "memberName": "Rajesh|Praveen|Kalai|Parvathi|Jagan|Bharani",
+                  "eventId": 1
+               },
+               "evaluatorName": "Rajesh|Praveen|Kalai|Parvathi|Jagan|Bharani",
+               "count": "1|2|... | 0",
+               "report": " Detailed Report",
+               "evaluatorRole": "Toastmaster|AhCounter|Timer|Grammarian|Evaluator|..",
+               "memberRole": "Toastmaster|AhCounter|Timer|Grammarian|Evaluator|.."
+            }""")
+    @PostMapping(value = "/updateEvaluationReport")
+    @ResponseBody
+    ResponseEntity updateEvaluationReport(@RequestBody String evaluationRequest){
+
+        boolean isSuccess = evaluationService.updateEvaluationReport(evaluationRequest)
+
+        if(isSuccess)
+            return new ResponseEntity<String>("Event Updated", HttpStatus.OK)
+        else
+            return new ResponseEntity<String>("Event Couldn't be Updated", HttpStatus.EXPECTATION_FAILED)
+    }
+
+    @GetMapping(value = "/reportByEvaluatorRole/{evaluatorRole}")
+    @ResponseBody
+    @ApiOperation(value = "Get evaluation report by evaluator Role",
+            notes = """enter a evaluator Role to search for evaluation report for his/her event. ex: AhCounter|Timer""")
+    public getEvaluationReportByEvaluatorRole(@PathVariable("evaluatorRole") String evaluatorRole ){
+        return evaluationService.getEvaluationReportByEvaluatorRole(evaluatorRole)
+    }
 }

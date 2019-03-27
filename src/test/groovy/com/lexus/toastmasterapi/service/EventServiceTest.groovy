@@ -68,21 +68,21 @@ class EventServiceTest {
 
         String updateEventJson = "{\n" +
                 "   \"key\": {\n" +
-                "      \"eventDate\": \"2019-03-12\",\n" +
-                "      \"eventId\": 1\n" +
+                "      \"eventDate\": \"2019-03-26\",\n" +
+                "      \"eventId\": 3\n" +
                 "   },\n" +
-                "   \"word_of_day\": \"Bizzare\",\n" +
-                "   \"theme_of_day\": \"Fun\",\n" +
-                "   \"toastmaster\": \"Bharani\",\n" +
-                "   \"speaker_1\": \"Praveen\",\n" +
-                "   \"speaker_2\": \"Kalai\",\n" +
-                "   \"spkr_evaluator_1\": \"Parvathi\",\n" +
+                "   \"word_of_day\": \"\",\n" +
+                "   \"theme_of_day\": \"Digitization\",\n" +
+                "   \"toastmaster\": \"Rajesh\",\n" +
+                "   \"speaker_1\": \"Bharani\",\n" +
+                "   \"speaker_2\": \"Parvathi\",\n" +
+                "   \"spkr_evaluator_1\": \"Praveen\",\n" +
                 "   \"spkr_evaluator_2\": \"Jagan\",\n" +
-                "   \"topic_master\": \"Rajesh\",\n" +
-                "   \"timer_report\": \"Jagan\",\n" +
-                "   \"ahCounter_report\": \"Rajesh\",\n" +
-                "   \"gnrl_evaluator\": \"Bharani\",\n" +
-                "   \"grammarian\": \"Parvathi\"\n" +
+                "   \"topic_master\": \"Kalai\",\n" +
+                "   \"timer_report\": \"Praveen\",\n" +
+                "   \"ahCounter_report\": \"Kalai\",\n" +
+                "   \"gnrl_evaluator\": \"Rajesh\",\n" +
+                "   \"grammarian\": \"Jagan\"\n" +
                 "}"
 
         boolean isUpdated = eventService.updateEvents(updateEventJson)

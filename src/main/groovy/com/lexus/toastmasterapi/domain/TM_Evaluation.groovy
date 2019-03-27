@@ -20,9 +20,6 @@ class TM_Evaluation {
     private String report
 
     @Column
-    private String evaluatorRole
-
-    @Column
     private String memberRole
 
     EvaluationPrimaryKey getKey() {
@@ -55,14 +52,6 @@ class TM_Evaluation {
 
     void setReport(String report) {
         this.report = report
-    }
-
-    String getEvaluatorRole() {
-        return evaluatorRole
-    }
-
-    void setEvaluatorRole(String evaluatorRole) {
-        this.evaluatorRole = evaluatorRole
     }
 
     String getMemberRole() {

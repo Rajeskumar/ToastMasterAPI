@@ -11,4 +11,6 @@ interface EvaluationDAO extends CassandraRepository<TM_Evaluation, EvaluationPri
     List<TM_Evaluation> findByKeyEventId (int eventId)
 
     List<TM_Evaluation> findByKeyMemberName (String memberName)
+
+    List<TM_Evaluation> findByKeyEvaluatorRole (String evaluatorRole)
 }

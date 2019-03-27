@@ -137,4 +137,55 @@ class APIController {
     TM_Events getEventbyEventDate(@PathVariable("eventDate") String eventDate){
         return eventService.getEventbyEventDate(eventDate)
     }
+
+    @ApiResponses(value = [
+            @ApiResponse(code = 200, message = 'OK'),
+            @ApiResponse(code = 400, message = 'Bad request'),
+            @ApiResponse(code = 500, message = 'Internal Server Error')])
+    @ApiOperation(value = "Delete Event by event data",
+            notes = """enter a event data to delete.""")
+    @PostMapping(value = "/deleteEvent")
+    @ResponseBody
+    ResponseEntity deleteEvent(@RequestBody String eventData){
+
+        eventService.deleteEvent(eventData)
+
+        return new ResponseEntity<String>("Event Deleted", HttpStatus.OK)
+    }
+
+    @ApiResponses(value = [
+            @ApiResponse(code = 200, message = 'OK'),
+            @ApiResponse(code = 400, message = 'Bad request'),
+            @ApiResponse(code = 500, message = 'Internal Server Error')])
+    @ApiOperation(value = "Update the next Toastmaster event",
+            notes = """
+            {
+               "key": {
+                  "eventDate": "2019-03-12",
+                  "eventId": 1
+               },
+               "word_of_day": "Impeccable",
+               "theme_of_day": "Fun",
+               "toastmaster": "Bharani",
+               "speaker_1": "Praveen",
+               "speaker_2": "Kalai",
+               "spkr_evaluator_1": "Parvathi",
+               "spkr_evaluator_2": "Jagan",
+               "topic_master": "Rajesh",
+               "timer_report": "Jagan",
+               "ahCounter_report": "Rajesh",
+               "gnrl_evaluator": "Bharani",
+               "grammarian": "Parvathi"
+            }""")
+    @PostMapping(value = "/updateEvent")
+    @ResponseBody
+    ResponseEntity updateToastmasterEvent(@RequestBody String eventRequest){
+
+        boolean isSuccess = eventService.updateEvents(eventRequest)
+
+        if(isSuccess)
+            return new ResponseEntity<String>("Event Updated Successfully", HttpStatus.CREATED)
+        else
+            return new ResponseEntity<String>("Event Couldn't be Updated", HttpStatus.EXPECTATION_FAILED)
+    }
 }

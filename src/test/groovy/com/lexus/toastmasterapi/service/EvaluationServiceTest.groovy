@@ -42,6 +42,23 @@ class EvaluationServiceTest extends Specification {
     }
 
     @Unroll('#testName')
+    def "GetEvaluationReportByEvaluatorRole"() {
+
+        List<TM_Evaluation> evaluationReport
+
+        when:
+        evaluationReport = evaluationService.getEvaluationReportByEvaluatorRole(evaluatorRole)
+
+        then:
+        !evaluationReport?.any{TM_Evaluation evaluation -> evaluation.key.evaluatorRole != evaluatorRole}
+
+        where:
+        testName                     | evaluatorRole
+        'Query Report for AhCounter' | 'AhCounter'
+        'Query Report for Timer'     | 'Timer'
+    }
+
+    @Unroll('#testName')
     def "GetEvaluationReportByEventId"() {
         List<TM_Evaluation> evaluationReport
 
@@ -63,16 +80,37 @@ class EvaluationServiceTest extends Specification {
                 "  \"key\": {\n" +
                 "    \"memberName\": \"Rajesh\",\n" +
                 "    \"eventId\": 1\n" +
+                "    \"evaluatorRole\": Toastmaster\n" +
                 "  },\n" +
                 "  \"evaluatorName\": \"Bharani\",\n" +
                 "  \"count\": \"0\",\n" +
                 "  \"report\": \"Give Pause between sentence. Speak Slowly and Clearly. Pronounce words clearly.\",\n" +
-                "  \"evaluatorRole\": \"Toastmaster\",\n" +
                 "  \"memberRole\": \"Topic Speaker\"\n" +
                 "}"
 
         when:
         boolean isSuccess = evaluationService.insertEvaluationReport(evaluationJson)
+
+        then:
+        isSuccess
+    }
+
+    def "Verify the evaluation report Update to backend"() {
+
+        String evaluationJson = "{\n" +
+                "  \"key\": {\n" +
+                "    \"memberName\": \"Praveen\",\n" +
+                "    \"eventId\": 1,\n" +
+                "    \"evaluatorRole\":\"Timer\"\n" +
+                "  },\n" +
+                "  \"evaluatorName\": \"Jagan\",\n" +
+                "  \"count\": 0,\n" +
+                "  \"report\": \"7m40s\",\n" +
+                "  \"memberRole\": \"Speaker\"\n" +
+                "}"
+
+        when:
+        boolean isSuccess = evaluationService.updateEvaluationReport(evaluationJson)
 
         then:
         isSuccess

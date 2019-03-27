@@ -29,6 +29,10 @@ class EvaluationService {
         return evaluationDAO.findByKeyEventId(eventId)
     }
 
+    List<TM_Evaluation> getEvaluationReportByEvaluatorRole(String evaluatorRole){
+        return evaluationDAO.findByKeyEvaluatorRole(evaluatorRole)
+    }
+
     boolean insertEvaluationReport (String jsonMessage){
 
         TM_Evaluation evaluationData = mapper.readValue(jsonMessage, TM_Evaluation.class)
@@ -38,6 +42,21 @@ class EvaluationService {
         TM_Evaluation insertedReport = evaluationDAO.insert(evaluationData)
 
         if(insertedReport){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    boolean updateEvaluationReport (String jsonMessage){
+
+        TM_Evaluation evaluationData = mapper.readValue(jsonMessage, TM_Evaluation.class)
+
+        evaluationData.key.id = UUID.randomUUID()
+
+        TM_Evaluation updatedReport = evaluationDAO.save(evaluationData)
+
+        if(updatedReport){
             return true
         }else{
             return false
