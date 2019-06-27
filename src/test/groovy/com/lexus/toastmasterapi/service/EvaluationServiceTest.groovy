@@ -80,7 +80,7 @@ class EvaluationServiceTest extends Specification {
                 "  \"key\": {\n" +
                 "    \"memberName\": \"Rajesh\",\n" +
                 "    \"eventId\": 1\n" +
-                "    \"evaluatorRole\": Toastmaster\n" +
+                "    \"evaluatorRole\": \"Toastmaster\"\n" +
                 "  },\n" +
                 "  \"evaluatorName\": \"Bharani\",\n" +
                 "  \"count\": \"0\",\n" +

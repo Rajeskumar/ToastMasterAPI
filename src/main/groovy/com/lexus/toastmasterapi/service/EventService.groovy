@@ -31,7 +31,7 @@ class EventService {
 
         TM_Events newEvent = mapper.readValue(createEventJson, TM_Events.class)
 
-        log.debug("New Event Object :"+newEvent.toString())
+        log.info("New Event Object :"+newEvent.toString())
         TM_Events insertedEvent = eventDAO.insert(newEvent)
         if(insertedEvent) {
            true

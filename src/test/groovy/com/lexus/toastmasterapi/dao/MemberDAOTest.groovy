@@ -22,7 +22,7 @@ class MemberDAOTest {
 
         List<TM_Member> allMembers = memberDAO.findAll()
 
-        Assert.assertEquals(3, allMembers.size())
+        Assert.assertEquals(6, allMembers.size())
 
     }
 }
